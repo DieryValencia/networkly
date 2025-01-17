@@ -1,0 +1,101 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <title>Networkly</title>
+</head>
+<body class="bg-light">
+
+    <!-- Barra de navegación -->
+    <nav class="navbar navbar-expand-lg navbar-light bg-primary shadow-sm">
+        <div class="container-fluid">
+            <a class="navbar-brand text-white" href="{% url 'home' %}">Networkly</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+                aria-controls="navbarNav" aria-expanded="false" aria-label="Alternar navegación">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" href="{% url 'home' %}">Inicio</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Nosotros</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'products' %}">Perfil</a>
+                    </li>
+                    {% if request.user.is_authenticated %}
+                        <li class="nav-item">
+                            <a class="nav-link" href="{% url 'exit' %}">Salir</a>
+                        </li>
+                    {% else %}
+                        <li class="nav-item">
+                            <a class="nav-link" href="{% url 'login' %}">Ingresar</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{% url 'register' %}">Registrarse</a>
+                        </li>
+                    {% endif %}
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Contenido principal -->
+    <div class="container py-5">
+        <h2 class="text-center text-primary mb-4">Inicio</h2>
+        {% block content %}
+        {% endblock %}
+        {% load static %}
+       
+       
+        
+        <!-- Galería de imágenes de una red profesional -->
+        <div class="row row-cols-1 row-cols-md-3 g-4">
+            <div class="col">
+                <div class="card h-100">                
+                <img src="{% static 'img/img.jpg' %}" height="350"  class="card-img-top" alt="Imagen de red profesional">
+                    <div class="card-body">
+                        <h5 class="card-title">Redes de Contactos</h5>
+                        <p class="card-text">Establecer una red de contactos profesionales es fundamental en el mundo de los negocios.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col">
+                <div class="card h-100">                   
+                    <img src="{% static 'img/img2.jpg' %}"  width="" height="350"   class="card-img-top" alt="Imagen de red profesional">
+                    <div class="card-body">
+                        <h5 class="card-title">Conexiones Globales</h5>
+                        <p class="card-text">Conectar con profesionales a nivel mundial abre nuevas oportunidades de negocio.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col">
+                <div class="card h-100">
+                    <img src="{% static 'img/img3.jpg' %}"  width="" height="350" class="card-img-top" alt="Imagen de red profesional">
+                    <div class="card-body">
+                        <h5 class="card-title">Colaboración Profesional</h5>
+                        <p class="card-text">Las redes permiten colaborar en proyectos conjuntos y potenciar el desarrollo profesional.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="bg-dark text-white py-4">
+        <div class="container text-center">
+            <p>&copy; 2025 Networkly. Todos los derechos reservados.</p>
+            <p><a href="#" class="text-white">Política de Privacidad</a> | <a href="#" class="text-white">Términos y Condiciones</a></p>
+        </div>
+    </footer>
+
+    <!-- Scripts de Bootstrap -->
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js"></script>
+</body>
+</html>

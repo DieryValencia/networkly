@@ -1,0 +1,69 @@
+{% extends 'networkly_app/base.html' %}
+
+{% block content %}
+<div class="container">
+    <h3 class="text-center text-primary">Perfil</h3>
+
+    <!-- Mostrar el perfil si ya existe -->
+    <div class="mb-4">
+        <h4>Experiencia Profesional</h4>
+        <p id="experiencia-profesional">{{ profile.experiencia_profesional|default:"No proporcionado" }}</p>
+    </div>
+
+    <div class="mb-4">
+        <h4>Estudios</h4>
+        <p id="estudios">{{ profile.estudios|default:"No proporcionado" }}</p>
+    </div>
+
+    <div class="mb-4">
+        <h4>Hobbies</h4>
+        <p id="hobbies">{{ profile.hobbies|default:"No proporcionado" }}</p>
+    </div>
+
+    <!-- Botón para editar el perfil -->
+    <button class="btn btn-warning" id="edit-button">Editar Perfil</button>
+
+    <!-- Formulario para editar el perfil (inicialmente oculto) -->
+    <form method="POST" class="shadow p-4 rounded bg-white mt-4" id="edit-form" style="display:none;">
+        {% csrf_token %}
+        <div class="mb-3">
+            <label for="experiencia_profesional" class="form-label">Experiencia Profesional</label>
+            <textarea class="form-control" id="experiencia_profesional" name="experiencia_profesional" rows="3">{{ form.experiencia_profesional.value }}</textarea>
+        </div>
+        
+        <div class="mb-3">
+            <label for="estudios" class="form-label">Estudios</label>
+            <textarea class="form-control" id="estudios" name="estudios" rows="3">{{ form.estudios.value }}</textarea>
+        </div>
+
+        <div class="mb-3">
+            <label for="hobbies" class="form-label">Hobbies</label>
+            <textarea class="form-control" id="hobbies" name="hobbies" rows="3">{{ form.hobbies.value }}</textarea>
+        </div>
+
+        <button type="submit" class="btn btn-primary">Guardar cambios</button>
+    </form>
+</div>
+
+<!-- Script para manejar el cambio entre mostrar y editar -->
+<script>
+    const editButton = document.getElementById('edit-button');
+    const editForm = document.getElementById('edit-form');
+    const experienciaElement = document.getElementById('experiencia-profesional');
+    const estudiosElement = document.getElementById('estudios');
+    const hobbiesElement = document.getElementById('hobbies');
+
+    editButton.addEventListener('click', function() {
+        // Ocultar los elementos de solo lectura
+        experienciaElement.style.display = 'none';
+        estudiosElement.style.display = 'none';
+        hobbiesElement.style.display = 'none';
+
+        // Mostrar el formulario de edición
+        editForm.style.display = 'block';
+
+        // Cambiar el texto del botón
+        editButton.style.display = 'none';
+    });
+</script>
+{% endblock %}
